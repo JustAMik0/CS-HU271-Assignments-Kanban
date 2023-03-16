@@ -42,3 +42,7 @@ test('divides 12 / 4 to equal 3', () => {
 test('divides 5 / 2 to equal 2.5', () => {
     expect(divide(5, 2)).toBe(2.5)
 });
+
+test('divides 7 / 0 to equal Infinity', () => {
+    expect(divide(7, 0)).toBe(Infinity)
+});
