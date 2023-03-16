@@ -44,6 +44,26 @@ test('GET the sum api with the a valid first parameter and a missing second para
     await request.get('/api/operations/sum/3').expect(404)
 });
 
+test('GET the subtract api with the valid parameters and expect the correct 200 status code', async () => {
+    await request.get('/api/operations/subtract/8/5').expect(200)
+});
+
+test('GET the subtract api with the valid parameters (8 and 5) and expect the correct result returned (3)', async () => {
+    const response = await request.get('/api/operations/subtract/8/5')
+    console.log(`response.text = ${response.text}`);
+
+    expect(Number(response.text)).toBe(3)
+});
+
+test('GET the subtract api with the a valid first parameter and an invalid second parameter and expect the 400 (bad request) status code', async () => {
+    await request.get('/api/operations/subtract/8/second_parameter_is_not_a_number').expect(400)
+});
+
+test('GET the subtract api with the a valid first parameter and a missing second parameter and expect the 404 (not found) status code, because that route does not exist', async () => {
+    await request.get('/api/operations/subtract/8/').expect(404)
+    await request.get('/api/operations/subtract/8').expect(404)
+});
+
 test('should be listening', async () => {
     await request.get('/').expect(200);
 });
